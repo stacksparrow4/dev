@@ -1,0 +1,22 @@
+{
+	"name": "Debian",
+	"image": "stacksparrow4/dev",
+	"runArgs": [
+		"--cap-add=SYS_PTRACE",
+		"--security-opt",
+		"seccomp=unconfined",
+		"--hostname",
+		"dev"
+	],
+	"remoteUser": "user",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python",
+				"ms-vscode.cpptools-extension-pack",
+				"golang.go",
+				"rust-lang.rust-analyzer"
+			]
+		}
+	}
+}
