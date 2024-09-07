@@ -6,6 +6,9 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y libc6:i3
 RUN useradd -m -s /bin/bash user && usermod -a -G sudo user && echo '%sudo ALL=(ALL:ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 RUN ln -s /usr/bin/python3 /usr/local/bin/python
+RUN chown -R user:user /opt
+
+RUN gem install one_gadget
 
 USER user
 
@@ -13,7 +16,9 @@ ENV LC_CTYPE=C.UTF-8
 ENV SHELL=/bin/bash
 
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-RUN bash -c "$(curl -fsSL https://gef.blah.cat/sh)"
-RUN /home/user/.cargo/bin/cargo install pwninit
+RUN /home/user/.cargo/bin/cargo install pwninit ropr
+
+WORKDIR /opt
+RUN git clone https://github.com/pwndbg/pwndbg && cd pwndbg && ./setup.sh
 
 WORKDIR /home/user
