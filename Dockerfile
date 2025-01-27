@@ -24,4 +24,7 @@ RUN /home/user/.cargo/bin/cargo install --git https://github.com/robbert1978/pwn
 WORKDIR /opt
 RUN git clone https://github.com/pwndbg/pwndbg && cd pwndbg && ./setup.sh
 
+RUN pip3 install flask-unsign --break-system-packages
+RUN echo 'export PATH="$PATH:/home/user/.local/bin"' >> /root/.bashrc
+
 WORKDIR /home/user
